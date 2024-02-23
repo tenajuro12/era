@@ -1,0 +1,47 @@
+{{template "base" .}}
+
+{{define "title"}}Home{{end}}
+
+{{define "main"}}
+    <h2>Latest Movies</h2>
+    {{if .Movies2}}
+     <table>
+        <tr>
+
+            <th>ID</th>
+            <th>Title</th>
+            <th>Original_title</th>
+            <th>Genre</th>
+            <th>Released_year</th>
+            <th>Released_status</th>
+            <th>Synopsis</th>
+            <th>Rating</th>
+            <th>Director</th>
+            <th>Cast</th>
+            <th>Distributor</th>
+
+
+        </tr>
+        {{range .Movies2}}
+        <tr>
+            <td><a href='/movies/{{.ID}}'>{{.ID}}</a></td>
+            <td>#{{.Title}}</td>
+            <td>#{{.Original_title}}</td>
+            <td>#{{.Genre}}</td>
+            <td>{{humanDate .Released_year}}</td>
+            <td>#{{.Released_status}}</td>
+            <td>#{{.Synopsis}}</td>
+            <td>#{{.Rating}}</td>
+            <td>#{{.Director}}</td>
+            <td>#{{.Cast}}</td>
+            <td>#{{.Distributor}}</td>
+
+            </tr>
+        {{end}}
+    </table>
+    {{else}}
+        <p>There's nothing to see here... yet!</p>
+    {{end}}
+{{end}}
+
+

@@ -1,0 +1,98 @@
+{{template "base" .}}
+
+{{define "title"}}Add Movie{{end}}
+
+{{define "main"}}
+<form action='/movies/create' method='POST'>
+    <input type='hidden' name='csrf_token' value='{{.CSRFToken}}'>
+    {{with .Form}}
+
+    <div>
+        <label>Title:</label>
+        {{with .Errors.Get "title"}}
+            <label class='error'>{{.}}</label>
+        {{end}}
+        <input type='text' name='title' value='{{.Get "title"}}'>
+    </div>
+
+    <div>
+            <label>Original title:</label>
+            <input type='text' name='original_title' value='{{.Get "original_title"}}'>
+    </div>
+
+     <div>
+              <label>Genre:</label>
+              <select name="genre">
+                  <option value="horror">Horror</option>
+                  <option value="comedy">Comedy</option>
+                  <option value="drama">Drama</option>
+                  <option value="scifi">Sci-fi</option>
+
+              </select>
+     </div>
+
+     <div>
+            <label>Released year and Runtime:</label>
+            {{with .Errors.Get "released_year"}}
+                <label class='error'>{{.}}</label>
+            {{end}}
+            <input type='datetime-local' name='released_year' value='{{.Get "released_year"}}'>
+     </div>
+
+
+    <div>
+        <label>Released Status:</label>
+        {{with .Errors.Get "released_status"}}
+                        <label class='error'>{{.}}</label>
+                    {{end}}
+                                {{$exp := or (.Get "released_status") "TRUE"}}
+
+                <input type='radio' name='released_status' value='TRUE' {{if (eq $exp "TRUE")}}checked{{end}}> Released
+                <input type='radio' name='released_status' value='FALSE' {{if (eq $exp "FALSE")}}checked{{end}}> Uneleased
+            </div>
+  </div>
+
+
+    <div>
+        <label>Synopsis:</label>
+        <textarea name='synopsis'>{{.Get "synopsis"}}</textarea>
+    </div>
+
+
+    <div>
+                <label>Rating:</label>
+                <input type='text' name='rating' value='{{.Get "rating"}}'>
+    </div>
+
+     <div>
+            <label>Director:</label>
+            {{with .Errors.Get "director"}}
+                <label class='error'>{{.}}</label>
+            {{end}}
+            <input type='text' name='director' value='{{.Get "director"}}'>
+     </div>
+
+    <div>
+                <label>Cast:</label>
+                <input type='text' name='cast' value='{{.Get "cast"}}'>
+    </div>
+
+
+    <div>
+        <label>Distributor:</label>
+        {{with .Errors.Get "distributor"}}
+            <label class='error'>{{.}}</label>
+        {{end}}
+        <input type='text' name='distributor' value='{{.Get "distributor"}}'>
+    </div>
+
+    <div>
+        <input type='submit' value='Add'>
+    </div>
+
+
+        {{end}}
+
+    </form>
+{{end}}
+

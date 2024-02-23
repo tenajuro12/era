@@ -1,0 +1,74 @@
+
+ {{template "base" .}}
+{{define "main"}}
+
+ <!-- Update Form -->
+        <button onclick="toggleUpdateForm('{{ .ID }}')">Update</button>
+
+   <form id="update-form-{{ .ID }}" method='POST' action="/movies/{{.ID}}" style="display: none;">
+     {{with .Form}}
+            <div>
+                <label>Title:</label>
+                <input type='text' name='title' value='{{.Title}}'>
+            </div>
+
+            <div>
+                <label>Original title:</label>
+                <input type='text' name='original_title' value='{{.Original_title}}'>
+            </div>
+
+            <div>
+                <label>Genre:</label>
+                <input type='text' name='genre' value='{{.Genre}}'>
+            </div>
+
+            <div>
+                <label>Released year and Runtime:</label>
+                <input type='datetime-local' name='released_year' value='{{humanDate .Released_year}}'>
+            </div>
+
+            <div>
+                <label>Released status:</label>
+                <input type='checkbox' name='released_status' {{if .Released_status}}checked{{end}}>
+            </div>
+
+            <div>
+                <label>Synopsis:</label>
+                <textarea name='synopsis'>{{.Synopsis}}</textarea>
+            </div>
+
+            <div>
+                <label>Rating:</label>
+                <input type='text' name='rating' value='{{.Rating}}'>
+            </div>
+
+            <div>
+                <label>Director:</label>
+                <input type='text' name='director' value='{{.Director}}'>
+            </div>
+
+            <div>
+                <label>Cast:</label>
+                <input type='text' name='cast' value='{{.Cast}}'>
+            </div>
+
+            <div>
+                <label>Distributor:</label>
+                <input type='text' name='distributor' value='{{.Distributor}}'>
+            </div>
+
+            <div>
+                <input type='submit' value='Update'>
+            </div>
+     {{end}}
+
+   </form>
+
+
+    <script>
+        function toggleUpdateForm(movieId) {
+            var updateForm = document.getElementById('update-form-' + movieId);
+            updateForm.style.display = (updateForm.style.display === 'none' || updateForm.style.display === '') ? 'block' : 'none';
+        }
+    </script>
+ {{end}}
